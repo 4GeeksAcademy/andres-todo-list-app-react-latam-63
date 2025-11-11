@@ -42,14 +42,20 @@ const List = () => {
         } return 'hidden'
     };
 
+    const Placeholder = (array) => {
+        if (array.length === 0) {
+            return 'No tasks, add a task'
+        } return 'What needs to be done?'
+    }
 
     return (
+
         <ul className="todo-list list-group col-6 list-group-flush">
-            <li className="list-group-item ps-5"><input type="text" className="input-field" placeholder="What needs to be done?" onChange={e => setInputValue(e.target.value)} value={inputValue} onKeyDown={CreateTask} /></li>
+            <li className="list-group-item ps-5"><input type="text" className="input-field" placeholder={Placeholder(tasks)} onChange={e => setInputValue(e.target.value)} value={inputValue} onKeyDown={CreateTask} /></li>
             {tasks.map((item, index) => {
                 return (
                     <li className="list-group-item ps-5 list-item" key={index} id={index} onMouseEnter={MouseEnter} onMouseLeave={MouseLeave}>{Capitalize(item)}
-                    <i className="fa-solid fa-x delete-marker" key={index} style={{ visibility: `${Visibility(index)}` }} onClick={() => DeleteTask(index)}></i></li>
+                        <i className="fa-solid fa-x delete-marker" key={index} style={{ visibility: `${Visibility(index)}` }} onClick={() => DeleteTask(index)}></i></li>
                 )
             })}
             <li className="task-counter list-group-item ps-3">{TaskCounter(tasks)}</li>
